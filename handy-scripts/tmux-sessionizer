@@ -8,7 +8,7 @@ ripgrep() {
 }
 
 # FUZZY FIND DIRECTORIES
-[[ $# -eq 1 ]] && selected=$1 || selected=$(ripgrep | fzf --border=rounded --margin=5)
+[[ $# -eq 1 ]] && selected=$1 || selected=$(ripgrep | fzf --border=rounded --margin=1)
 
 # EXITS IF NO SELECTED
 [[ -z $selected ]] && exit 0
