@@ -1,0 +1,74 @@
+#!/bin/bash
+
+cat ~/.dotfiles/.bashrc > ~/.bashrc
+cat ~/.dotfiles/.bash_aliases > ~/.bash_aliases
+cat ~/.dotfiles/.gitconfig > ~/.gitconfig
+
+[ -d ~/.local ] || mkdir ~/.local
+[ -d ~/.local/bin ] || mkdir ~/.local/bin
+[ -d ~/.config ] || mkdir ~/.config
+
+apt-get update -y && apt-get upgrade -y
+
+
+install_which() {
+	[ -f $PREFIX/bin/which ] && return
+	pkg install -y which
+}
+
+install_neovim() {
+	[ -f $PREFIX/bin/nvim ] && return
+	pkg install -y neovim
+}
+
+install_ripgrep() {
+	[ -f $PREFIX/bin/rg ] && return
+	pkg install -y ripgrep
+}
+
+install_fd() {
+	[ -f $PREFIX/bin/fd ] && return
+	pkg install -y fd
+}
+
+install_fzf() {
+	[ -f $PREFIX/bin/fzf ] && return
+	pkg install -y fzf
+}
+
+install_delta() {
+	[ -f $PREFIX/bin/delta ] && return
+	pkg install -y git-delta
+}
+
+install_bat() {
+	[ -f $PREFIX/bin/bat ] && return
+	pkg install -y bat
+}
+
+install_clang() {
+	pkg install -y clang
+}
+
+install_rust() {
+	pkg install -y rust
+}
+
+symlink_scripts() {
+	for script in ~/.dotfiles/handy-scripts/*; do
+		ln -s $script ~/.local/bin/
+	done
+	ln -s ~/.dotfiles/config/nvim ~/.config/nvim
+}
+
+install_which
+install_neovim
+install_ripgrep
+install_fd
+install_fzf
+install_delta
+install_bat
+install_clang
+install_rust
+
+symlink_scripts
