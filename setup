@@ -47,10 +47,12 @@ install_bat() {
 }
 
 install_clang() {
+	[ -f $PREFIX/bin/clang ] && return
 	pkg install -y clang
 }
 
 install_rust() {
+	[[ -f $PREFIX/bin/rustc && -f $PREFIX/bin/cargo ]] && return
 	pkg install -y rust
 }
 
