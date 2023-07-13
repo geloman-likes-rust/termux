@@ -21,6 +21,11 @@ install_man() {
 	pkg install -y man
 }
 
+install_exa() {
+	[ -f $PREFIX/bin/exa ] && return
+	pkg install -y exa
+}
+
 install_neovim() {
 	[ -f $PREFIX/bin/nvim ] && return
 	pkg install -y neovim
@@ -70,6 +75,7 @@ symlink_scripts() {
 
 install_which
 install_man
+install_exa
 install_neovim
 install_ripgrep
 install_fd
