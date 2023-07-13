@@ -3,6 +3,7 @@
 cat ~/.dotfiles/.bashrc > ~/.bashrc
 cat ~/.dotfiles/.bash_aliases > ~/.bash_aliases
 cat ~/.dotfiles/.gitconfig > ~/.gitconfig
+cat ~/.dotfiles/.tmux.conf > ~/.tmux.conf
 
 [ -d ~/.local ] || mkdir ~/.local
 [ -d ~/.local/bin ] || mkdir ~/.local/bin
@@ -56,6 +57,12 @@ install_bat() {
 	pkg install -y bat
 }
 
+install_tmux_tpm() {
+	[ -d ~/.tmux/plugins/tpm ] && return
+	echo "Installing tmux-plugins/tpm......................................"
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+}
+
 install_clang() {
 	[ -f $PREFIX/bin/clang ] && return
 	pkg install -y clang
@@ -82,6 +89,7 @@ install_fd
 install_fzf
 install_delta
 install_bat
+install_tmux_tpm
 install_clang
 install_rust
 
