@@ -1,11 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
 branch_preview() {
   fzf --header "Checkout Branch" \
   --header-first \
   --preview "git diff --color=always {1} | delta" \
   --preview-label "Branch Preview" \
-  --preview-window right,80% \
+  --preview-window top,85% \
   --padding 1
 }
 
