@@ -13,3 +13,5 @@ alias gcm="git commit -m"
 alias gp="git push"
 alias gco="git-branch-previewer"
 alias gdf="git diff"
+
+alias ls="exa -la --no-user --no-filesize --no-time"
