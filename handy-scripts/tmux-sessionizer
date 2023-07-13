@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
 ripgrep() {
-  rg ~/* \
+  rg ~/ \
   --files --sort-files --hidden \
     --glob="!{**/.git,**/target,**/node_modules,**/obj}" \
     --null 2> /dev/null | xargs -0 dirname | sort -u
+}
+
+fd_find() {
+  fd --type d
 }
 
 # FUZZY FIND DIRECTORIES
