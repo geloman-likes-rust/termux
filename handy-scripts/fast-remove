@@ -1,0 +1,57 @@
+#!/bin/sh
+
+
+CYAN='\033[0;36m'
+NC='\033[0m'
+ORANGE='\033[0;33m'
+RED='\033[0;91m'
+GREEN='\033[1;32m'
+WHITE='\033[1;37m'
+
+
+fzf_file() {
+  fzf -e \
+    --preview "bat --theme=1337 --color=always {}" \
+    --preview-window right,70% \
+    --bind up:preview-page-up,down:preview-page-down \
+    --header "$(printf " ${ORANGE}Remove File ")" \
+    --header-first \
+    --preview-label " File Preview " \
+    --border-label "$(printf " ${ORANGE}Remove File ")" \
+    --border=sharp \
+    --prompt " " \
+    --pointer ""
+}
+
+fzf_directory() {
+  fzf -e \
+    --header "$(printf " ${CYAN}Remove Directory ")" \
+    --header-first \
+    --border-label "$(printf " ${CYAN}Remove Directory ")" \
+    --border=sharp \
+    --prompt " " \
+    --pointer ""
+}
+
+remove_file() {
+  selected="$(rg --files --sort-files --hidden --glob="!{**.git/*,**/node_modules/*,.cache,**.jpg,**.png,**.mp3,**.mp4,**.rpm}" | fzf_file)"
+  [ -z $selected ] && exit 0
+  response=$(printf "${GREEN}NO ${RED}YES" | tr ' ' '\n' | fzf --border-label "$(printf "${ORANGE} Do u really want to remove this file? ")" --header="$(printf "${WHITE}Remove ${ORANGE}${selected}${NC}")" --border=rounded --margin=15% --pointer "" --prompt "  ")
+  [ "$response" = "YES" ] && rm -rdf $selected && printf "\n${RED} Removed ${ORANGE}file:\n\n\t${NC}filename: ${ORANGE}${selected}${NC}\n\n"
+}
+
+remove_directory() {
+  selected=$(fd --hidden --type d | fzf_directory)
+  [ -z "$selected" ] && exit 0
+  response=$(printf "NO ${RED}YES" | tr ' ' '\n' | fzf --border-label "$(printf "${CYAN} Do u really want to remove this Directory? ")" --header="$(printf "Remove ${CYAN}${selected}${NC}")" --border=rounded --margin=15% --pointer "" --prompt "  ")
+  [ "$response" = "YES" ] && rm -rdf "$selected" && printf "\n${RED} Removed ${CYAN}Directory:\n\n\t${NC}dirname: ${CYAN}${selected}${NC}\n\n"
+}
+
+remove_what() {
+  selected=$(printf "${CYAN}directory ${ORANGE}file" | tr ' ' '\n' | fzf --header-first --border-label " Remove what? " --header "Remove what?" --border=rounded --margin=30%,30% --pointer "" --prompt "  ")
+  [ -z "$selected" ] && exit 0
+  [ "$selected" = "file" ] && remove_file
+  [ "$selected" = "directory" ] && remove_directory
+}
+
+remove_what
