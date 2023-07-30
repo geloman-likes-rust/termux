@@ -22,18 +22,13 @@ end
 
 -- Enable the following language servers
 local language_servers = {
-  -- bashls = {},
-  -- cssls = {},
-  -- emmet_ls = {},
-  -- jsonls = {},
-  -- pylsp = {},
-  -- lua_ls = {
-  --   Lua = {
-  --     workspace = { checkThirdParty = false },
-  --     telemetry = { enable = false },
-  --     globals = { 'vim' }
-  --   },
-  -- },
+  lua_ls = {
+    Lua = {
+      workspace = { checkThirdParty = false },
+      telemetry = { enable = false },
+      globals = { 'vim' }
+    },
+  },
 }
 
 
