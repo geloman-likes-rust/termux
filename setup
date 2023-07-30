@@ -13,47 +13,47 @@ apt-get update -y && apt-get upgrade -y
 
 
 install_which() {
-	[ -f $PREFIX/bin/which ] && return
+	[ -f "$PREFIX"/bin/which ] && return
 	pkg install -y which
 }
 
 install_man() {
-	[ -f $PREFIX/bin/man ] && return
+	[ -f "$PREFIX"/bin/man ] && return
 	pkg install -y man
 }
 
 install_exa() {
-	[ -f $PREFIX/bin/exa ] && return
+	[ -f "$PREFIX"/bin/exa ] && return
 	pkg install -y exa
 }
 
 install_neovim() {
-	[ -f $PREFIX/bin/nvim ] && return
+	[ -f "$PREFIX"/bin/nvim ] && return
 	pkg install -y neovim
 }
 
 install_ripgrep() {
-	[ -f $PREFIX/bin/rg ] && return
+	[ -f "$PREFIX"/bin/rg ] && return
 	pkg install -y ripgrep
 }
 
 install_fd() {
-	[ -f $PREFIX/bin/fd ] && return
+	[ -f "$PREFIX"/bin/fd ] && return
 	pkg install -y fd
 }
 
 install_fzf() {
-	[ -f $PREFIX/bin/fzf ] && return
+	[ -f "$PREFIX"/bin/fzf ] && return
 	pkg install -y fzf
 }
 
 install_delta() {
-	[ -f $PREFIX/bin/delta ] && return
+	[ -f "$PREFIX"/bin/delta ] && return
 	pkg install -y git-delta
 }
 
 install_bat() {
-	[ -f $PREFIX/bin/bat ] && return
+	[ -f "$PREFIX"/bin/bat ] && return
 	pkg install -y bat
 }
 
@@ -64,18 +64,18 @@ install_tmux_tpm() {
 }
 
 install_clang() {
-	[ -f $PREFIX/bin/clang ] && return
+	[ -f "$PREFIX"/bin/clang ] && return
 	pkg install -y clang
 }
 
 install_rust() {
-	[[ -f $PREFIX/bin/rustc && -f $PREFIX/bin/cargo ]] && return
+	[ -f "$PREFIX"/bin/rustc ] && [ -f "$PREFIX"/bin/cargo ] && return
 	pkg install -y rust
 }
 
 symlink_scripts() {
 	for script in ~/.dotfiles/handy-scripts/*; do
-		ln -s $script ~/.local/bin/
+		ln -s "$script" ~/.local/bin/
 	done
 	ln -s ~/.dotfiles/config/nvim ~/.config/nvim
 }
