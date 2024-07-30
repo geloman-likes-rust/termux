@@ -1,4 +1,4 @@
-[ -f ~/.dotfiles/.aliasrc ] && . ~/.dotfiles/.aliasrc
+[ -f ~/.dotfiles/aliasrc ] && . ~/.dotfiles/aliasrc
 [ -f ~/.fzf.bash ] && . ~/.fzf.bash
 
 [ -d ~/.local/bin ] && PATH=$PATH:$HOME/.local/bin

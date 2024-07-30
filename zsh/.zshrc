@@ -1,6 +1,6 @@
 [ -f ~/.dotfiles/zsh/.zsh_prompt ] && . ~/.dotfiles/zsh/.zsh_prompt
 [ -f ~/.dotfiles/zsh/.zshenv ] && . ~/.dotfiles/zsh/.zshenv
-[ -f ~/.dotfiles/.aliasrc ] && . ~/.dotfiles/.aliasrc
+[ -f ~/.dotfiles/aliasrc ] && . ~/.dotfiles/aliasrc
 
 # vi mode
 bindkey -v
