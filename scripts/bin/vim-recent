@@ -1,0 +1,4 @@
+#!/bin/sh
+
+[ -n "$(command -v nvim)" ] && nvim -c "norm '0" && exit 0
+[ -n "$(command -v vim)" ] && vim -c "norm '0" && exit 0
