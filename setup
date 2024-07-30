@@ -23,8 +23,9 @@ pkg install -y zsh man which eza bat git git-delta neovim lua-language-server ri
 # Symlink zshrc
 [ -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.bak && ln -s ~/.dotfiles/zsh/.zshrc ~/.zshrc
 
-# Symlink bashrc
+# Symlink bash configs
 [ -f ~/.bashrc ] && mv ~/.bashrc ~/.bashrc.bak && ln -s ~/.dotfiles/bash/.bashrc ~/.bashrc
+[ -f ~/.inputrc ] && mv ~/.inputrc ~/.inputrc.bak; ln -s ~/.dotfiles/bash/.inputrc ~/.inputrc
 
 # Install tmux plugin manager
 [ ! -d ~/.tmux/plugins/tpm ] && mkdir -p ~/.tmux/plugins/tpm && $PREFIX/bin/git --depth 1 clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
