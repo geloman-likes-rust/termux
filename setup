@@ -1,96 +1,31 @@
-#!/bin/bash
+#!/bin/sh
 
-cat ~/.dotfiles/.bashrc > ~/.bashrc
-cat ~/.dotfiles/.bash_aliases > ~/.bash_aliases
-cat ~/.dotfiles/.gitconfig > ~/.gitconfig
-cat ~/.dotfiles/.tmux.conf > ~/.tmux.conf
+mkdir -p ~/.config ~/.local/bin
 
-[ -d ~/.local ] || mkdir ~/.local
-[ -d ~/.local/bin ] || mkdir ~/.local/bin
-[ -d ~/.config ] || mkdir ~/.config
+pkg update -y && pkg upgrade -y
+pkg install -y zsh man which eza bat git git-delta neovim lua-language-server ripgrep fd fzf
 
-apt-get update -y && apt-get upgrade -y
+# Clone dotfiles if doesn't exist
+[ ! -d ~/.dotfiles ] && $PREFIX/bin/git clone --depth 1 https://github.com/geloman-likes-rust/termux ~/.dotfiles
 
+# Delete & replace default termux config
+[ -d ~/.termux ] && rm -rdf ~/.termux && ln -s ~/.dotfiles/termux ~/.termux
 
-install_which() {
-	[ -f "$PREFIX"/bin/which ] && return
-	pkg install -y which
-}
+# Symlink neovim config
+[ ! -d ~/.config/nvim ] && ln -s ~/.dotfiles/nvim ~/.config
 
-install_man() {
-	[ -f "$PREFIX"/bin/man ] && return
-	pkg install -y man
-}
+# Symlink tmux config
+[ ! -f ~/.tmux.conf ] && ln -s ~/.dotfiles/tmux/.tmux.conf ~/.tmux.conf
 
-install_exa() {
-	[ -f "$PREFIX"/bin/exa ] && return
-	pkg install -y exa
-}
+# Symlink zshrc
+[ -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.bak && ln -s ~/.dotfiles/zsh/.zshrc ~/.zshrc
 
-install_neovim() {
-	[ -f "$PREFIX"/bin/nvim ] && return
-	pkg install -y neovim
-}
+# Symlink bashrc
+[ -f ~/.bashrc ] && mv ~/.bashrc ~/.bashrc.bak && ln -s ~/.dotfiles/bash/.bashrc ~/.bashrc
 
-install_ripgrep() {
-	[ -f "$PREFIX"/bin/rg ] && return
-	pkg install -y ripgrep
-}
+# Install tmux plugin manager
+[ ! -d ~/.tmux/plugins/tpm ] && mkdir -p ~/.tmux/plugins/tpm && $PREFIX/bin/git --depth 1 clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+[ -n "$(command -v tmux)" ] && TMUX_PLUGIN_MANAGER_PATH="~/.tmux/plugins/" tmux -c '~/.tmux/plugins/tpm/bindings/install_plugins'
 
-install_fd() {
-	[ -f "$PREFIX"/bin/fd ] && return
-	pkg install -y fd
-}
-
-install_fzf() {
-	[ -f "$PREFIX"/bin/fzf ] && return
-	pkg install -y fzf
-}
-
-install_delta() {
-	[ -f "$PREFIX"/bin/delta ] && return
-	pkg install -y git-delta
-}
-
-install_bat() {
-	[ -f "$PREFIX"/bin/bat ] && return
-	pkg install -y bat
-}
-
-install_tmux_tpm() {
-	[ -d ~/.tmux/plugins/tpm ] && return
-	echo "Installing tmux-plugins/tpm......................................"
-	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-}
-
-install_clang() {
-	[ -f "$PREFIX"/bin/clang ] && return
-	pkg install -y clang
-}
-
-install_rust() {
-	[ -f "$PREFIX"/bin/rustc ] && [ -f "$PREFIX"/bin/cargo ] && return
-	pkg install -y rust
-}
-
-symlink_scripts() {
-	for script in ~/.dotfiles/handy-scripts/*; do
-		ln -s "$script" ~/.local/bin/
-	done
-	ln -s ~/.dotfiles/config/nvim ~/.config/nvim
-}
-
-install_which
-install_man
-install_exa
-install_neovim
-install_ripgrep
-install_fd
-install_fzf
-install_delta
-install_bat
-install_tmux_tpm
-install_clang
-install_rust
-
-symlink_scripts
+# Install neovim plugins
+$PREFIX/bin/nvim --headless "+Lazy! restore" +qa
