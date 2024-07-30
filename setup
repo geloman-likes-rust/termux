@@ -11,6 +11,9 @@ pkg install -y zsh man which eza bat git git-delta neovim lua-language-server ri
 # Delete & replace default termux config
 [ -d ~/.termux ] && rm -rdf ~/.termux && ln -s ~/.dotfiles/termux ~/.termux
 
+# Symlink gitconfig
+[ -f ~/.gitconfig ] && mv ~/.gitconfig ~/.gitconfig.bak && ln -s ~/.dotfiles/git/.gitconfig ~/.gitconfig
+
 # Symlink neovim config
 [ ! -d ~/.config/nvim ] && ln -s ~/.dotfiles/nvim ~/.config
 
