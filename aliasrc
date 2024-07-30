@@ -1,0 +1,59 @@
+#!/bin/sh
+
+# navigation aliases
+alias \
+  ..="cd .." \
+  ...="cd ../.." \
+  ....="cd ../../.." \
+  .....="cd ../../../.." \
+
+# tmux aliases
+alias \
+  tls="tmux ls" \
+  tks="tmux kill-server" \
+  tds="tmux-db-session" \
+  ta="tmux a" \
+  td="tmux detach" \
+  tx="tmux-sessionizer" \
+  tns="tmux new -s" \
+  trn="tmux rename-session -t" \
+
+# version control aliases
+alias \
+  glo="git log --oneline --color=always" \
+  gb="git branch" \
+  gcm="git commit -m" \
+  gp="git push" \
+  gpf="git push -f" \
+  gdf="git diff" \
+  gsu="git stash -u" \
+  gsp="git stash pop" \
+  gsc="git stash clear" \
+  gsl="git stash list" \
+  gss="git stash show" \
+  gca="git commit --amend" \
+  gcan="git commit --amend --no-edit" \
+  gdt="git difftool -y" \
+  gwa="git worktree add" \
+  gcob="git checkout -b" \
+
+# custom scripts
+alias \
+  vr="vim-recent" \
+
+# personal aliases
+alias \
+  v='nvim' \
+  vi="nvim" \
+  vim="nvim" \
+  vii='nvim' \
+  iv='nvim' \
+  ivi='nvim' \
+  ivii='nvim' \
+  nv='nvim' \
+  nvi='nvim' \
+  tree='tree --gitignore' \
+  python='python3' \
+  mem="neofetch memory" \
+  cpu="neofetch cpu --cpu_temp" \
+  disk="neofetch disk" \
