@@ -21,11 +21,6 @@ local function highlight_all()
     highlight("LazyProp", { blend = 0, link = 'none' })
     highlight("LazyDimmed", { blend = 0, link = 'none' })
 
-    -- TREESITTER-CONTEXT HIGHLIGHTS
-    highlight("TreesitterContext", { link = 'none' })
-    highlight("TreesitterContextBottom", { underdotted = true })
-    highlight("TreesitterContextLineNumberBottom", { underdotted = true })
-
     -- FLOATING WINDOW HIGHLIGHT
     highlight("FloatBorder", { blend = 0 })
     highlight("NormalFloat", { blend = 0 })
