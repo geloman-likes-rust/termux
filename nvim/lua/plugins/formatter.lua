@@ -1,7 +1,7 @@
 return {
 	'stevearc/conform.nvim',
 	event = 'BufWritePre',
-	enabled = false,
+	enabled = true,
 	opts = {
 		formatters_by_ft = {
 			lua = { 'stylua' },
