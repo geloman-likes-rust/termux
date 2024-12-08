@@ -14,6 +14,9 @@ pkg install -y zsh man which eza bat git lazygit git-delta golang gopls neovim s
 # Symlink gitconfig
 [ -f ~/.gitconfig ] && mv ~/.gitconfig ~/.gitconfig.bak && ln -s ~/.dotfiles/git/.gitconfig ~/.gitconfig
 
+# Symlink lazygit config
+[ -f ~/.config/lazygit/config.yml ] && mv ~/.config/lazygit/config.yml ~/.config/lazygit/config.yml.bak; ln -s ~/.dotfiles/lazygit/config.yml ~/.config/lazygit/config.yml
+
 # Symlink neovim config
 [ ! -d ~/.config/nvim ] && ln -s ~/.dotfiles/nvim ~/.config
 
