@@ -3,7 +3,7 @@
 mkdir -p ~/.config ~/.local/bin
 
 pkg update -y && pkg upgrade -y
-pkg install -y zsh man which eza bat git git-delta golang gopls neovim lua-language-server ripgrep fd fzf
+pkg install -y zsh man which eza bat git lazygit git-delta golang gopls neovim stylua lua-language-server ripgrep fd fzf
 
 # Clone dotfiles if doesn't exist
 [ ! -d ~/.dotfiles ] && $PREFIX/bin/git clone --depth 1 https://github.com/geloman-likes-rust/termux ~/.dotfiles
