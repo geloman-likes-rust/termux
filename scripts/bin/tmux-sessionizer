@@ -1,0 +1,24 @@
+#!/bin/sh
+
+export FZF_DEFAULT_OPTS="--border-label=' tmux-sessionizer '"
+
+directories="$(find "$HOME" -maxdepth 3 -type d)"
+selected="$(echo "$directories" | fzf)"
+
+[ -z "$selected" ] && exit 0
+session_name="$(basename "$selected" | tr . _)"
+
+# INSIDE TMUX
+if [ -n "$TMUX" ]; then
+    tmux has-session -t "$session_name" 2> /dev/null
+    [ $? -eq 0 ] && tmux switch-client -t "$session_name" && exit 0
+    [ $? -ne 0 ] && tmux new-session -ds "$session_name" -c "$selected"
+    tmux switch-client -t "$session_name" && exit 0
+fi
+
+# OUTSIDE TMUX
+if [ -z "$TMUX" ]; then
+    tmux has-session -t "$session_name" 2> /dev/null
+    [ $? -eq 0 ] && tmux attach-session -t "$session_name" && exit 0
+    [ $? -ne 0 ] && tmux new-session -s "$session_name" -c "$selected" && exit 0
+fi
