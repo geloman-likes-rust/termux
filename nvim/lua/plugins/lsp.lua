@@ -1,10 +1,8 @@
 return {
 	'neovim/nvim-lspconfig',
 	event = { 'BufReadPost', 'BufWritePost', 'BufNewFile' },
-	enabled = false,
 	config = function()
 		require('lspconfig.ui.windows').default_options.border = 'rounded'
-		require('neodev').setup()
 		local lspconfig = require 'lspconfig'
 		local util = lspconfig.util
 
@@ -39,5 +37,4 @@ return {
 			root_dir = util.root_pattern('go.work', 'go.mod', '.git'),
 		}
 	end,
-	dependencies = { 'folke/neodev.nvim' },
 }
